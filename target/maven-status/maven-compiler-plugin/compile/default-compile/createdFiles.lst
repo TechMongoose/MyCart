@@ -1,0 +1,11 @@
+com\mycompany\mycart\entities\Product.class
+com\mycompany\mycart\servlets\LogoutServlet.class
+com\mycompany\mycart\Dao\UserDao.class
+com\mycompany\mycart\helper\FactoryProvider.class
+com\mycompany\mycart\entities\User.class
+com\mycompany\mycart\servlets\LoginServlet.class
+com\mycompany\mycart\servlets\RegisterServlet.class
+com\mycompany\mycart\servlets\ProductOperationServlet.class
+com\mycompany\mycart\Dao\ProductDao.class
+com\mycompany\mycart\Dao\CategoryDao.class
+com\mycompany\mycart\entities\Category.class
