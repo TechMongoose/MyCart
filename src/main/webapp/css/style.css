@@ -10,4 +10,8 @@
     background: #e2e2e2;
     cursor: pointer;
 }
+.list-group-item.active{
+    background:#e53935!important;
+    border-color: #e53935!important;
+}
 
