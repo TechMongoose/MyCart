@@ -4,6 +4,7 @@
     Author     : Lokesh
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.mycompany.mycart.helper.Helper"%>
 <%@page import="com.mycompany.mycart.entities.Category"%>
 <%@page import="com.mycompany.mycart.Dao.CategoryDao"%>
@@ -23,13 +24,25 @@
     <body>
         
         <%@include file="components/navbar.jsp" %>
+        <div class="container-fluid">
         <div class="row mt-3 mx-2">
-            
+           
             <%
+               String cat = request.getParameter("category");
+               //out.println(cat);
                ProductDao dao = new ProductDao(FactoryProvider.getFactory());
-               List<Product> list = dao.getAllProducts();
-               CategoryDao cdao= new CategoryDao(FactoryProvider.getFactory());
-               List<Category> clist =  cdao.getCategories();
+                List<Product> list = null;
+                // if(cat==null){
+                //   list=new ArrayList<Product>();
+                // }
+                if(cat == null || cat.trim().equals("all")){
+                    list  = dao.getAllProducts();
+                  }else{
+                    int cid = Integer.parseInt(cat.trim());
+                    list = dao.getAllProductsById(cid);
+                  }
+                CategoryDao cdao= new CategoryDao(FactoryProvider.getFactory());
+                List<Category> clist =  cdao.getCategories();
             %>
             
             <!--show category-->
@@ -37,7 +50,7 @@
             <div class="col-md-2">
             
                 <div class="list-group mt-4">
-                    <a href="#" class="list-group-item list-group-item-action active">
+                    <a href="index.jsp?category=all" class="list-group-item list-group-item-action active">
                          All Products
                     </a>  
                     
@@ -45,7 +58,7 @@
                     for(Category c:clist){
                        
                 %>
-                    <a href="#" class="list-group-item list-group-item-action"><%= c.getCategoryTitle()%></a>
+                    <a href="index.jsp?category=<%= c.getCategoryId()%>" class="list-group-item list-group-item-action"><%= c.getCategoryTitle()%></a>
                 <%
                         
                     }
@@ -56,7 +69,7 @@
             </div>
             <!--show product-->
             
-            <div class="col-md-8">
+            <div class="col-md-10">
             
                 <!--row-->
                 <div class="row mt-4">
@@ -83,14 +96,15 @@
                                     </p>
                                 </div>
                                     <div class="card-footer">
-                                        <button class="btn custom-bg text-white">Add to cart</button>
-                                        <button class="btn btn-outline-primary ">&#8377;<%=p.getpPrice()%></button>
+                                        <button class="btn custom-bg text-white">Add to Cart</button>
+                                        <button class="btn btn-outline-primary ">&#8377; <%=p.getpPrice()%></button>
                                     </div>
                                 
                             </div>
-                             <%
-                                
-                                }
+                             <%}
+                                if(list.size()==0){
+                                    out.println("<h3>No item in this Category</h3");
+                                 }
                             %>
                             
                         </div>
@@ -101,6 +115,7 @@
                 
             </div>
             
+        </div>
         </div>
         
         
