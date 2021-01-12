@@ -111,6 +111,10 @@ public class Product {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    //calculate price after discount
+    public int getPriceAfterApplyingDiscount(){
+        int d = (int)((this.getpDiscount()/100.0)*this.getpPrice());
+        return this.getpPrice() - d;
+    }
     
 }
