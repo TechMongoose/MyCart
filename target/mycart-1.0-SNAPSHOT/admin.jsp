@@ -290,6 +290,6 @@
         
         
         <!-- End Product modal-->
-
+        <%@include file="components/common_modals.jsp" %>
     </body>
 </html>
