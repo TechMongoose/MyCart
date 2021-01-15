@@ -7,7 +7,8 @@ function add_to_cart(pid, pname, price) {
         let product = {productId: pid, productName: pname, productQuantity: 1, productPrice: price};
         products.push(product);
         localStorage.setItem("cart", JSON.stringify(products));
-        console.log("product is added for the first time");
+        //console.log("product is added for the first time");
+        showToast("product is added to cart");
     } else {
         //cart is already present
         let pcart = JSON.parse(cart);
@@ -22,13 +23,15 @@ function add_to_cart(pid, pname, price) {
                } 
             });
             localStorage.setItem("cart", JSON.stringify(pcart));
-            console.log("product quantity is increased");
+            //console.log("product quantity is increased");
+            showToast(oldProduct.productName+" quantity is increased  , Quantity = " + oldProduct.productQuantity);
         }else{
             //we have to add the product
             let product = {productId: pid, productName: pname, productQuantity: 1, productPrice: price};
             pcart.push(product);
             localStorage.setItem("cart", JSON.stringify(pcart));
-            console.log("product is added");
+            //console.log("product is added");
+            showToast("Product is added to cart");
         }
     }
    updateCart(); 
@@ -104,6 +107,7 @@ function deleteItemFromCart(pid){
     let newcart = cart.filter((item) => item.productId != pid)
     localStorage.setItem('cart',JSON.stringify(newcart));
     updateCart();
+    showToast("Item is removed from cart ");
 }
 
 
@@ -111,4 +115,11 @@ $(document).ready(function(){
     updateCart();
 });
 
-
+function showToast(content){
+    $("#toast").addClass("display");
+    $("#toast").html(content);
+    setTimeout(() => {
+       $("#toast").removeClass("display"); 
+    }, 5000);
+    
+}
