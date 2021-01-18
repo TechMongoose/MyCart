@@ -1,3 +1,6 @@
+<%@page import="java.util.Map"%>
+
+<%@page import="com.mycompany.mycart.helper.Helper"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mycompany.mycart.entities.Category"%>
 <%@page import="com.mycompany.mycart.helper.FactoryProvider"%>
@@ -21,6 +24,11 @@
 %>
 <% CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
    List<Category> list = cdao.getCategories();
+   
+
+    //getting count of user and product:
+    Map<String,Long> m = Helper.getCounts(FactoryProvider.getFactory());
+    
 %>
 
 
@@ -61,7 +69,7 @@
 
                             </div>
 
-                            <h1>2345</h1>
+                            <h1><%=m.get("userCount")%></h1>
                             <h1 class="text-uppercase text-muted">Users</h1>
 
                         </div>
@@ -83,7 +91,7 @@
 
                             </div>
 
-                            <h1>2342</h1>
+                            <h1><%= list.size()%></h1>
                             <h1 class="text-uppercase text-muted">Categories</h1>
 
                         </div>
@@ -104,7 +112,7 @@
                                 <img style="max-width: 125px;" class="img-fluid rounded-circle" src="img/box.png" alt="product_icon">
 
                             </div>
-                            <h1>34</h1>
+                            <h1><%=m.get("productCount")%></h1>
                             <h1 class="text-uppercase text-muted">Products</h1>
 
                         </div>
