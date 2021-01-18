@@ -35,5 +35,7 @@
         <%@include file="components/navbar.jsp" %>
         
         <h1>this is normal user panel</h1>
+        
+        <%@include file="components/common_modals.jsp" %>
     </body>
 </html>
